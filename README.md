@@ -1,4 +1,7 @@
-#Tópico 6:
+# Drive do projeto
+https://drive.google.com/drive/folders/1nm2cpPrsi22mQUJD7RdJmGtfUqmJkmAq?usp=sharing
+
+# Tópico 6:
 
 Desenvolver uma base de dados para gerir os resultados do campeonato português de
 andebol, da primeira divisão. Esta base de dados deve responder ao lançamento de
