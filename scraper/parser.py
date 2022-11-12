@@ -15,3 +15,8 @@ class Parser:
             info[key] = value
 
         return info
+
+    @staticmethod
+    def recinto_cidade(cidade):
+        result = cidade.find("form", {"id": "postalCodeSearchResultForm"}).select_one('p')
+        return result.find_all("strong")[1].text
