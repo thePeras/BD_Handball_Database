@@ -23,7 +23,7 @@
 DROP TABLE IF EXISTS Epoca;
 CREATE TABLE Epoca(
     nome TEXT,
-    inicio INTEGER, /*2021*/ <!-- 4 digitos -->
+    inicio INTEGER, /*2021* - 4 digitos */
     fim INTEGER,
     CONSTRAINT Epoca_PK PRIMARY KEY (inicio)
 );
