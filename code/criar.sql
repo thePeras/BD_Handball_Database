@@ -133,18 +133,18 @@ CREATE TABLE InscricaoAtleta(
     atleta INTEGER NOT NULL,
     equipa VARCHAR(50) NOT NULL,
     epoca INTEGER, /* TODO: NOT NULL CONSTRAINT inicioValido CHECK (inicio >= 2007 AND inicio <= 3000), */
-    CONSTRAINT EquipaAtleta_PK PRIMARY KEY (equipa, atleta),
+    CONSTRAINT InscricaoAtleta_PK PRIMARY KEY (equipa, atleta, epoca),
     CONSTRAINT Equipa_FK FOREIGN KEY (equipa) REFERENCES Equipa(nome),
     CONSTRAINT Atleta_FK FOREIGN KEY (atleta) REFERENCES Atleta(id)
     CONSTRAINT Epoca_FK FOREIGN KEY (epoca) REFERENCES Epoca(inicio)
 );
 
 DROP TABLE IF EXISTS InscricaoTreinador;
-CREATE TABLE InscricaoAtleta(
+CREATE TABLE InscricaoTreinador(
     treinador INTEGER NOT NULL,
     equipa VARCHAR(50) NOT NULL,
     epoca INTEGER NOT NULL, /* TODO: CONSTRAINT inicioValido CHECK (inicio >= 2007 AND inicio <= 3000), */
-    CONSTRAINT EquipaAtleta_PK PRIMARY KEY (equipa, atleta),
+    CONSTRAINT InscricaoTreinador_PK PRIMARY KEY (equipa, treinador, epoca),
     CONSTRAINT Equipa_FK FOREIGN KEY (equipa) REFERENCES Equipa(nome),
     CONSTRAINT Treinador_FK FOREIGN KEY (treinador) REFERENCES Treinador(id)
     CONSTRAINT Epoca_FK FOREIGN KEY (epoca) REFERENCES Epoca(inicio)
