@@ -149,30 +149,3 @@ CREATE TABLE InscricaoTreinador(
     CONSTRAINT Treinador_FK FOREIGN KEY (treinador) REFERENCES Treinador(id)
     CONSTRAINT Epoca_FK FOREIGN KEY (epoca) REFERENCES Epoca(inicio)
 );
-
-DROP TABLE IF EXISTS JogoGolo;
-CREATE TABLE JogoGolo(
-    jogo INTEGER NOT NULL,
-    golo INTEGER NOT NULL,
-    CONSTRAINT JogoGolo_PK PRIMARY KEY (jogo, golo),
-    CONSTRAINT Jogo_FK FOREIGN KEY (jogo) REFERENCES Jogo(id),
-    CONSTRAINT Golo_FK FOREIGN KEY (golo) REFERENCES Golo(id)
-);
-
-DROP TABLE IF EXISTS JogoPausaTecnica;
-CREATE TABLE JogoPausaTecnica(
-    jogo INTEGER NOT NULL,
-    pausaTecnica INTEGER NOT NULL,
-    CONSTRAINT JogoPausaTecnica_PK PRIMARY KEY (jogo, pausaTecnica),
-    CONSTRAINT Jogo_FK FOREIGN KEY (jogo) REFERENCES Jogo(id),
-    CONSTRAINT PausaTecnica_FK FOREIGN KEY (pausaTecnica) REFERENCES PausaTecnica(id)
-);
-
-DROP TABLE IF EXISTS JogoInterrupcao;
-CREATE TABLE JogoInterrupcao(
-    jogo INTEGER NOT NULL,
-    interrupcao INTEGER NOT NULL,
-    CONSTRAINT JogoInterrupcao_PK PRIMARY KEY (jogo, interrupcao),
-    CONSTRAINT Jogo_FK FOREIGN KEY (jogo) REFERENCES Jogo(id),
-    CONSTRAINT Interrupcao_FK FOREIGN KEY (interrupcao) REFERENCES Interrupcao(id)
-);

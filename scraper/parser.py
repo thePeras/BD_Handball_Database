@@ -20,3 +20,8 @@ class Parser:
     def recinto_cidade(cidade):
         result = cidade.find("form", {"id": "postalCodeSearchResultForm"}).select_one('p')
         return result.find_all("strong")[1].text
+
+    @staticmethod
+    def jogo(jogo):
+        arbitros = jogo.find("div", {"class": "game-detail__info"}).find_all("table")[1].find_all("tr")[0].find_all("td")[1].text.split(',')
+
