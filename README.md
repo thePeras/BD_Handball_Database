@@ -9,3 +9,5 @@ Desenvolver uma base de dados para gerir os resultados do campeonato português 
 resultados jornada a jornada, marcadores dos golos, equipas que jogam em casa e jogam
 como visitante. Pretende-se saber o estado do campeonato em qualquer jornada, as equipas
 em condições de ir às competições europeias e em risco de despromoção.
+
+![UML_Scheme](Handball-UML.png "UML")
