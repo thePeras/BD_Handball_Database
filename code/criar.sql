@@ -1,26 +1,3 @@
-/* Create tables for the following relational model:
- * 
- * Epoca(nome, inicio, fim)
- * Jornada(numero, epoca -> Epoca)
- * Jogo(id,inicio,jornada -> Jornada,visitada -> Equipa, visitante -> Equipa, arbitro1 -> Arbitro, arbitro2 -> Arbitro,recinto -> Recinto)
- * Recinto(nome,morada,cidade -> Cidade)
- * Cidade(nome)
- * Equipa(nome,moradaSede,email,telefone,website,recinto -> Recinto)
- * Atleta(id,nome,dataNascimento)
- * Treinador(id,nome,dataNascimento)
- * Arbitro(id,nome,dataNascimento)
- * Pausa(minuto,segundo,equipa -> Equipa, jogo->Jogo)
- * Golo(minuto,segundo,atleta -> Atleta,equipa -> Equipa, jogo->Jogo)
- * Sancao(minuto,segundo,tipo, atleta -> Atleta, jogo->Jogo)
-
- * 
- * The following constraints must be enforced:
- * 
- * The following queries must be answered:
- * 
-*/
-
-
 DROP TABLE IF EXISTS Epoca;
 CREATE TABLE Epoca(
     nome VARCHAR(50),
