@@ -15,6 +15,3 @@ Modelo Relacional
 - Interrupcao(id, minuto, segundo, tipo, atleta -> Atleta, jogo->Jogo)
 - InscricaoAtleta(atleta -> Atleta, equipa -> Equipa, epoca -> Epoca)
 - InscricaoTreinador(treinador -> Treinador, equipa -> Equipa, epoca -> Epoca)
-- JogoGolo(jogo -> Jogo, golo -> Golo)
-- JogoPausaTenica(jogo -> Jogo, pausaTecnica -> PausaTenica)
-- JogoInterrupcao(jogo -> Jogo, interrupcao -> Interrupcao)
