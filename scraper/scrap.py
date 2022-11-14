@@ -9,4 +9,7 @@ def generate_events():
     # gerar sanções
     return []
 
+def generate_birthday():
+    return '12-02-2021'
+
 print(Parser.recinto_cidade(Fetcher.recinto_cidade(["4780", "400"])))
