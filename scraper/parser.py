@@ -11,17 +11,18 @@ class Parser:
         for tr in details.table.find_all("tr"):
             tds = tr.find_all("td")
             key = tds[0].text
-            value = tds[1].text.replace("\n", " ").strip().replace("                             ", " ")
-            info[key] = value
+            if key == "Morada":
+                values = tds[1].get_text(strip=True, separator='\n').splitlines()
+                codigo_postal = values[1][0:8]
+                info['Morada'] = values[0] + " " + codigo_postal
+                info['Cidade'] = values[1][9:]
+            else:
+                value = tds[1].text.replace("\n", " ").strip().replace("                             ", " ")
+                info[key] = value
 
         return info
 
     @staticmethod
-    def recinto_cidade(cidade):
-        result = cidade.find("form", {"id": "postalCodeSearchResultForm"}).select_one('p')
-        return result.find_all("strong")[1].text
-
-    @staticmethod
-    def jogo(jogo):
-        arbitros = jogo.find("div", {"class": "game-detail__info"}).find_all("table")[1].find_all("tr")[0].find_all("td")[1].text.split(',')
+    def arbitos(jogo):
+        return jogo.find("div", {"class": "game-detail__info"}).find_all("table")[1].find_all("tr")[0].find_all("td")[1].text.split(',')
 
