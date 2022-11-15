@@ -39,13 +39,15 @@ def insert_team(equipa_id):
     equipa = Fetcher.equipa(equipa_id)
     equipa = Parser.equipa(equipa)
 
+    # insert team recinto
+
     # insert team
-    equipa_members = Fetcher.equipa_members(equipa_id)
-    equipa_members = Parser.equipa_members(equipa_members)
-    
+
     # insert atletas
+    equipa_members = Fetcher.equipa_members(equipa_id)
 
     # insert treinador
+     # - gerar birthday
 
 def generate_events():
     # gerar golos
