@@ -21,13 +21,13 @@ epocas = {
 # Inserir as pausaTecnicas do jogo
 # Inserir os interrupcoes do jogo
 
-databse = Database();
+database = Database();
 
 for inicio, epoca_id in epocas.items():
     # Inserir época
     jogos = Fetcher.epoca_jogos(epoca_id)
     epoca_name = jogos[0]['PRO_ABREVIATURA']
-    databse.insert_epoca(epoca_name, inicio)
+    database.insert_epoca(epoca_name, inicio)
 
     for jogo in jogos:
         equipa_visitada = jogo['ID_OBJECTO_CASA']
@@ -41,7 +41,7 @@ for inicio, epoca_id in epocas.items():
         for team_id in [equipa_visitada, equipa_visitante]:
             team = Fetcher.equipa(team_id)
             team = Parser.equipa(team)
-            databse.insert_team(team_id, team)
+            database.insert_team(team_id, team)
 
         jogo_info = Fetcher.jogo(jogo['ID_PROVA_JOGO'])
         arbitros = Parser.arbitos(jogo_info)
@@ -49,7 +49,7 @@ for inicio, epoca_id in epocas.items():
         # Inserir Árbitros
         for arbitro in arbitros:
             birthay = Generator.birthday()
-            databse.insert_arbitro(arbitro, birthay)
+            database.insert_arbitro(arbitro, birthay)
 
         # Inserir Golos
 
@@ -61,3 +61,4 @@ for inicio, epoca_id in epocas.items():
                 timeout = Generator.timeout()
                 #insert timeout
 
+del database

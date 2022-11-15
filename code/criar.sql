@@ -68,7 +68,7 @@ CREATE TABLE Equipa(
 
 DROP TABLE IF EXISTS Atleta;
 CREATE TABLE Atleta(
-    id INTEGER,
+    id INTEGER AUTO_INCREMENT,
     nome VARCHAR(50) NOT NULL,
     dataNascimento VARCHAR(10) NOT NULL,
     CONSTRAINT Atleta_PK PRIMARY KEY (id)
@@ -76,7 +76,7 @@ CREATE TABLE Atleta(
 
 DROP TABLE IF EXISTS Treinador;
 CREATE TABLE Treinador(
-    id INTEGER,
+    id INTEGER AUTO_INCREMENT,
     nome VARCHAR(50) NOT NULL,
     dataNascimento VARCHAR(10) NOT NULL,
     CONSTRAINT Treinador_PK PRIMARY KEY (id)
@@ -84,7 +84,7 @@ CREATE TABLE Treinador(
 
 DROP TABLE IF EXISTS Arbitro;
 CREATE TABLE Arbitro(
-    id INTEGER,
+    id INTEGER AUTO_INCREMENT,
     nome VARCHAR(50) NOT NULL,
     dataNascimento VARCHAR(10) NOT NULL,
     CONSTRAINT Arbitro_PK PRIMARY KEY (id)

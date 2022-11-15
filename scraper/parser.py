@@ -4,8 +4,14 @@ class Parser:
     def equipa(equipa):
         details = equipa.find("div", {"class": "club-detail__content"})
         info = {
-            "nome": details.h3.text,
-            "logo": equipa.select_one(".club-detail__image").img["src"],
+            "Nome": details.h3.text,
+            "Logo": equipa.select_one(".club-detail__image").img["src"],
+            "Morada": "NULL",
+            "Cidade": "NULL",
+            "Recinto": "NULL",
+            "E-mail": "NULL",
+            "Telefone": "NULL",
+            "Website": "NULL",
         }
 
         for tr in details.table.find_all("tr"):

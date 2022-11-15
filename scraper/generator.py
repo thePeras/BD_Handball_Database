@@ -1,6 +1,7 @@
 from random import random
 
 class Generator:
+    
     @staticmethod
     def events():
         # gerar golos
