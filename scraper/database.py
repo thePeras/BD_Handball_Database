@@ -1,7 +1,12 @@
+import sqlite3
 from fetcher import Fetcher
 
-class Database:
+DATABSE_FILE = '../database.db'
 
+class Database:
+    sqliteConnection = sqlite3.connect(DATABSE_FILE)
+    cursor = sqliteConnection.cursor()
+    
     # add connection here
 
     def insert_epoca(nome, inicio):
