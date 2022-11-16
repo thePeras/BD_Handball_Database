@@ -10,14 +10,14 @@ class Database:
     
     def insert_epoca(self, nome, inicio):
         fim = inicio + 1
-        query = f"INSERT INTO Epoca (nome, inicio, fim) VALUES ('{nome}', {inicio}, {fim});"
+        query = f"INSERT INTO Epoca(nome, inicio, fim) VALUES ('{nome}', {inicio}, {fim});"
         self.execute(query)
 
     def insert_team(self, equipa_id, equipa, epoca_inicio):
         query = f'''
             INSERT INTO Cidade(nome) VALUES ({equipa['Cidade']});
             INSERT INTO Recinto(nome, morada, cidade) VALUES ({equipa['Recinto']}, {equipa['Morada']}, {equipa['Cidade']});
-            INSERT INTO Equipa(id, nome, moradaSede, logo, email, telefone, website, recinto) VALUES ({equipa_id}, {equipa['Nome']}, {equipa['Morada']}, {equipa['Logo']}, {equipa['E-mail']}, {equipa['Telefone']}, {equipa['Website']}, {equipa['Recinto']});
+            INSERT INTO Equipa(id, nome, logo, email, telefone, website, recinto) VALUES ({equipa_id}, {equipa['Nome']}, {equipa['Logo']}, {equipa['E-mail']}, {equipa['Telefone']}, {equipa['Website']}, {equipa['Recinto']});
         '''
         self.cursor.execute(query)
 
