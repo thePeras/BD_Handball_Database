@@ -20,15 +20,15 @@ CREATE TABLE Jogo(
     id INTEGER AUTO_INCREMENT,
     inicio VARCHAR(20) NOT NULL,
     jornada INTEGER NOT NULL,
-    visitada VARCHAR(50) NOT NULL,
-    visitante VARCHAR(50) NOT NULL,
+    visitada INTEGER NOT NULL,
+    visitante INTEGER NOT NULL,
     arbitro1 INTEGER NOT NULL,
     arbitro2 INTEGER NOT NULL,
     recinto INTEGER NOT NULL,
     CONSTRAINT Jogo_PK PRIMARY KEY (id),
     CONSTRAINT Jornada_FK FOREIGN KEY (jornada) REFERENCES Jornada(id),
-    CONSTRAINT Equipa_FK1 FOREIGN KEY (visitada) REFERENCES Equipa(nome),
-    CONSTRAINT Equipa_FK2 FOREIGN KEY (visitante) REFERENCES Equipa(nome),
+    CONSTRAINT Equipa_FK1 FOREIGN KEY (visitada) REFERENCES Equipa(id),
+    CONSTRAINT Equipa_FK2 FOREIGN KEY (visitante) REFERENCES Equipa(id),
     CONSTRAINT Arbitro_FK1 FOREIGN KEY (arbitro1) REFERENCES Arbitro(id),
     CONSTRAINT Arbitro_FK2 FOREIGN KEY (arbitro2) REFERENCES Arbitro(id),
     CONSTRAINT Recinto_FK FOREIGN KEY (recinto) REFERENCES Recinto(id),
@@ -54,6 +54,7 @@ CREATE TABLE Cidade(
 
 DROP TABLE IF EXISTS Equipa;
 CREATE TABLE Equipa(
+    id INTEGER AUTO_INCREMENT,
     nome VARCHAR(50) NOT NULL,
     moradaSede VARCHAR(50),
     logo VARCHAR(50) NOT NULL,
@@ -61,13 +62,13 @@ CREATE TABLE Equipa(
     telefone VARCHAR(20),
     website VARCHAR(30),
     recinto INTEGER,
-    CONSTRAINT Equipa_PK PRIMARY KEY (nome),
+    CONSTRAINT Equipa_PK PRIMARY KEY (id),
     CONSTRAINT Recinto_FK FOREIGN KEY (recinto) REFERENCES Recinto(id)
 );
 
 DROP TABLE IF EXISTS Atleta;
 CREATE TABLE Atleta(
-    id INTEGER,
+    id INTEGER AUTO_INCREMENT,
     nome VARCHAR(50) NOT NULL,
     dataNascimento VARCHAR(10) NOT NULL,
     CONSTRAINT Atleta_PK PRIMARY KEY (id)
@@ -75,7 +76,7 @@ CREATE TABLE Atleta(
 
 DROP TABLE IF EXISTS Treinador;
 CREATE TABLE Treinador(
-    id INTEGER,
+    id INTEGER AUTO_INCREMENT,
     nome VARCHAR(50) NOT NULL,
     dataNascimento VARCHAR(10) NOT NULL,
     CONSTRAINT Treinador_PK PRIMARY KEY (id)
@@ -83,7 +84,7 @@ CREATE TABLE Treinador(
 
 DROP TABLE IF EXISTS Arbitro;
 CREATE TABLE Arbitro(
-    id INTEGER,
+    id INTEGER AUTO_INCREMENT,
     nome VARCHAR(50) NOT NULL,
     dataNascimento VARCHAR(10) NOT NULL,
     CONSTRAINT Arbitro_PK PRIMARY KEY (id)
@@ -94,10 +95,10 @@ CREATE TABLE PausaTecnica(
     id INTEGER AUTO_INCREMENT,
     minuto INTEGER CONSTRAINT minutoValido CHECK (minuto >= 0 AND minuto <= 60) NOT NULL,
     segundo INTEGER CONSTRAINT segundoValido CHECK (segundo >= 0 AND segundo <= 60) NOT NULL,
-    equipa VARCHAR(50) NOT NULL,
+    equipa INTEGER NOT NULL,
     jogo INTEGER NOT NULL,
     CONSTRAINT PausaTecnica_PK PRIMARY KEY (id),
-    CONSTRAINT Equipa_FK FOREIGN KEY (equipa) REFERENCES Equipa(nome),
+    CONSTRAINT Equipa_FK FOREIGN KEY (equipa) REFERENCES Equipa(id),
     CONSTRAINT Jogo_FK FOREIGN KEY (jogo) REFERENCES Jogo(id)
 );
 
@@ -107,11 +108,11 @@ CREATE TABLE Golo(
     minuto INTEGER CONSTRAINT minutoValido CHECK (minuto >= 0 AND minuto <= 60) NOT NULL,
     segundo INTEGER CONSTRAINT segundoValido CHECK (segundo >= 0 AND segundo <= 60) NOT NULL,
     atleta INTEGER NOT NULL,
-    equipa VARCHAR(50) NOT NULL,
+    equipa INTEGER NOT NULL,
     jogo INTEGER NOT NULL,
     CONSTRAINT Golo_PK PRIMARY KEY (id),
     CONSTRAINT Atleta_FK FOREIGN KEY (atleta) REFERENCES Atleta(id),
-    CONSTRAINT Equipa_FK FOREIGN KEY (equipa) REFERENCES Equipa(nome),
+    CONSTRAINT Equipa_FK FOREIGN KEY (equipa) REFERENCES Equipa(id),
     CONSTRAINT Jogo_FK FOREIGN KEY (jogo) REFERENCES Jogo(id)
 );
 
@@ -131,10 +132,10 @@ CREATE TABLE Interrupcao(
 DROP TABLE IF EXISTS InscricaoAtleta;
 CREATE TABLE InscricaoAtleta(
     atleta INTEGER NOT NULL,
-    equipa VARCHAR(50) NOT NULL,
-    epoca INTEGER,
+    equipa INTEGER NOT NULL,
+    epoca INTEGER NOT NULL,
     CONSTRAINT InscricaoAtleta_PK PRIMARY KEY (equipa, atleta, epoca),
-    CONSTRAINT Equipa_FK FOREIGN KEY (equipa) REFERENCES Equipa(nome),
+    CONSTRAINT Equipa_FK FOREIGN KEY (equipa) REFERENCES Equipa(id),
     CONSTRAINT Atleta_FK FOREIGN KEY (atleta) REFERENCES Atleta(id)
     CONSTRAINT Epoca_FK FOREIGN KEY (epoca) REFERENCES Epoca(inicio)
 );
@@ -142,10 +143,10 @@ CREATE TABLE InscricaoAtleta(
 DROP TABLE IF EXISTS InscricaoTreinador;
 CREATE TABLE InscricaoTreinador(
     treinador INTEGER NOT NULL,
-    equipa VARCHAR(50) NOT NULL,
+    equipa INTEGER NOT NULL,
     epoca INTEGER NOT NULL,
     CONSTRAINT InscricaoTreinador_PK PRIMARY KEY (equipa, treinador, epoca),
-    CONSTRAINT Equipa_FK FOREIGN KEY (equipa) REFERENCES Equipa(nome),
+    CONSTRAINT Equipa_FK FOREIGN KEY (equipa) REFERENCES Equipa(id),
     CONSTRAINT Treinador_FK FOREIGN KEY (treinador) REFERENCES Treinador(id)
     CONSTRAINT Epoca_FK FOREIGN KEY (epoca) REFERENCES Epoca(inicio)
 );
