@@ -1,5 +1,4 @@
 class Parser:
-    
     @staticmethod
     def equipa(equipa):
         details = equipa.find("div", {"class": "club-detail__content"})

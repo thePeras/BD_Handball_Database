@@ -37,12 +37,12 @@ for inicio, epoca_id in epocas.items():
         for team_id in [equipa_visitada, equipa_visitante]:
             team = Fetcher.equipa(team_id)
             team = Parser.equipa(team)
-            database.insert_team(team_id, team)
+            database.insert_team(team_id, team, inicio)
             database.insert_team_in_epoca(team_id, inicio)
 
         # Inserir Jornada
         jornada = jogo['PJO_NUM_JORNADA']
-        jornada_id = Database.insert_jornada(jornada, inicio)
+        jornada_id = database.insert_jornada(jornada, inicio)
 
         jogo_info = Fetcher.jogo(jogo['ID_PROVA_JOGO'])
         arbitros = Parser.arbitos(jogo_info)
