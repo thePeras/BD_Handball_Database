@@ -37,6 +37,10 @@ class Database:
 
         self.cursor.execute(queries)
 
+    def insert_team_in_epoca(self, equipa_id, epoca_inicio):
+        query = f'INSERT INTO Classificacao(equipa, epoca) VALUES ({equipa_id}, {epoca_inicio});'
+        self.cursor.execute(query)
+
     def insert_arbitro(self, name, birthday):
         query = f"INSERT INTO Arbitro(nome, nascimento) VALUES ('{name}', '{birthday}');"
         self.cursor.execute(query)

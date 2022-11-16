@@ -9,7 +9,7 @@ CREATE TABLE Epoca(
 DROP TABLE IF EXISTS Jornada;
 CREATE TABLE Jornada(
     id INTEGER AUTO_INCREMENT,
-    numero INTEGER, /* TODO: add a function check */
+    numero INTEGER,s
     epoca INTEGER,
     CONSTRAINT Jornada_PK PRIMARY KEY (id),
     CONSTRAINT Epoca_FK FOREIGN KEY (epoca) REFERENCES Epoca(inicio)
@@ -154,8 +154,22 @@ DROP TABLE IF EXISTS Classificacao;
 CREATE TABLE Classificacao(
     equipa INTEGER NOT NULL,
     epoca INTEGER NOT NULL,
-    pontos INTEGER NOT NULL,
+    pontos INTEGER DEFAULT 0,
     CONSTRAINT Classificacao_PK PRIMARY KEY (equipa, epoca),
     CONSTRAINT Equipa_FK FOREIGN KEY (equipa) REFERENCES Equipa(id)
     CONSTRAINT Epoca_FK FOREIGN KEY (epoca) REFERENCES Epoca(inicio)
 );
+
+/* Trigger para verificar o número da jornada */
+DROP TRIGGER IF EXISTS checkJornadaTrigger;
+CREATE TRIGGER checkJornadaTrigger BEFORE INSERT ON Jornada
+FOR EACH ROW
+BEGIN
+    DECLARE numEquipas INTEGER;
+    SELECT COUNT(*) INTO numEquipas FROM Classificacao WHERE epoca = NEW.epoca;
+    IF NEW.numero > numEquipas - 1 THEN
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Jornada inválida';
+    END IF;
+END;
+
+
