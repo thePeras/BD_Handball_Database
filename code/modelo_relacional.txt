@@ -6,7 +6,7 @@ Modelo Relacional
 - Jogo(id, inicio, jornada -> Jornada, visitada -> Equipa, visitante -> Equipa, arbitro1 -> Arbitro, arbitro2 -> Arbitro, recinto -> Recinto)
 - Recinto(id, nome, morada, cidade -> Cidade)
 - Cidade(nome)
-- Equipa(id, nome, moradaSede, logo, email, telefone, website, recinto -> Recinto)
+- Equipa(id, nome, logo, email, telefone, website, recinto -> Recinto)
 - Atleta(id, nome, dataNascimento)
 - Treinador(id, nome, dataNascimento)
 - Arbitro(id, nome, dataNascimento)
@@ -15,3 +15,4 @@ Modelo Relacional
 - Interrupcao(id, minuto, segundo, tipo, atleta -> Atleta, jogo->Jogo)
 - InscricaoAtleta(atleta -> Atleta, equipa -> Equipa, epoca -> Epoca)
 - InscricaoTreinador(treinador -> Treinador, equipa -> Equipa, epoca -> Epoca)
+- Classificacao(equipa -> Equipa, epoca -> Epoca, pontos)

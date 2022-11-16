@@ -150,3 +150,13 @@ CREATE TABLE InscricaoTreinador(
     CONSTRAINT Treinador_FK FOREIGN KEY (treinador) REFERENCES Treinador(id)
     CONSTRAINT Epoca_FK FOREIGN KEY (epoca) REFERENCES Epoca(inicio)
 );
+
+DROP TABLE IF EXISTS Classificacao;
+CREATE TABLE Classificacao(
+    equipa INTEGER NOT NULL,
+    epoca INTEGER NOT NULL,
+    pontos INTEGER NOT NULL,
+    CONSTRAINT Classificacao_PK PRIMARY KEY (equipa, epoca),
+    CONSTRAINT Equipa_FK FOREIGN KEY (equipa) REFERENCES Equipa(id)
+    CONSTRAINT Epoca_FK FOREIGN KEY (epoca) REFERENCES Epoca(inicio)
+);
