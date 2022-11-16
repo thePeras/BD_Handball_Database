@@ -2,7 +2,7 @@ DROP TABLE IF EXISTS Epoca;
 CREATE TABLE Epoca(
     nome VARCHAR(50),
     inicio INTEGER CONSTRAINT inicioValido CHECK (inicio >= 2007 AND inicio <= 3000),
-    fim INTEGER CONSTRAINT fimValido CHECK (inicio >= 2007 AND inicio <= 3000),
+    fim INTEGER CONSTRAINT fimValido CHECK (fim >= 2008 AND fim <= 3000),
     CONSTRAINT Epoca_PK PRIMARY KEY (inicio)
 );
 
