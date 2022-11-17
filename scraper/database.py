@@ -44,12 +44,13 @@ class Database:
             nascimento = member['CIP_DATA_NASCIMENTO']
             nome = member['CIP_NOME']
             member_id = member['CIP_NUMERO']
-
-            collumn = 'Treinador' if member['ATLETA'] is None else 'Atleta'
-            query = f"INSERT OR IGNORE INTO {collumn}(id, nome, dataNascimento) VALUES ('{member_id}', '{nome}', '{nascimento}');"
-            queries += query
-            query = f"INSERT OR IGNORE INTO Inscricao{collumn} VALUES ('{member_id}', '{equipa_id}', '{epoca_inicio}');"
-            queries += query
+            
+            if(member['ATLETA'] != None or member['TECNICO'] != None):
+                collumn = 'Treinador' if member['ATLETA'] is None else 'Atleta'
+                query = f"INSERT OR IGNORE INTO {collumn}(id, nome, dataNascimento) VALUES ('{member_id}', '{nome}', '{nascimento}');"
+                queries += query
+                query = f"INSERT OR IGNORE INTO Inscricao{collumn} VALUES ('{member_id}', '{equipa_id}', '{epoca_inicio}');"
+                queries += query
 
         self.run_queries(queries)
 

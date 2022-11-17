@@ -58,7 +58,7 @@ for inicio, epoca_url in epocas.items():
             arbitros_ids = []
             for arbitro in arbitros:
                 birthay = Generator.birthday()
-                arbitro_id = database.insert_arbitro(arbitro, birthay)
+                arbitro_id = database.insert_arbitro(arbitro.trim(), birthay)
                 arbitros_ids.append(arbitro_id)
 
             # Insert Game

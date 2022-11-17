@@ -8,6 +8,8 @@
 
 ## Run
 
+Inside the scraper folder, run:
+
 ```bash
     python scraper.py
 ```
