@@ -1,4 +1,3 @@
-
 Modelo Relacional
 
 - Epoca(nome, inicio, fim)
