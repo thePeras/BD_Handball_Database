@@ -6,7 +6,7 @@ class Fetcher:
     @staticmethod
     def epoca_jogos(id_epoca):
         url = f'https://ws.fpa.pt/index.php/getResultadosCalendario/{id_epoca}/18149'
-        return requests.get(url)
+        return requests.get(url).json()
 
     @staticmethod
     def jogo(id_jogo):
@@ -25,4 +25,4 @@ class Fetcher:
     @staticmethod
     def equipa_members(id_equipa):
         url = f'https://ws.fpa.pt/index.php/getCipClubeEpocaEscalao/{id_equipa}/370/4/'
-        return requests.get(url)
+        return requests.get(url).json()

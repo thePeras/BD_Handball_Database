@@ -1,25 +1,42 @@
 import sqlite3
 from fetcher import Fetcher
 
+#path of this file
 DATABSE_FILE = '../database.db'
+CRIAR_FILE = '../code/criar.sql'
+
+fd = open(CRIAR_FILE, 'r')
+sqlFile = fd.read()
+fd.close()
+sqlCommands = sqlFile.split(';')
 
 class Database:
     def __init__(self):
         self.connection = sqlite3.connect(DATABSE_FILE)
         self.cursor = self.connection.cursor()
+        # Run create tables script
+        for command in sqlCommands:
+            self.cursor.execute(command)
     
+    def run_queries(self, queries):
+        queries = queries.split(';')
+        for query in queries:
+            query+= ';'
+            print(query)
+            self.cursor.execute(query)
+
     def insert_epoca(self, nome, inicio):
         fim = inicio + 1
-        query = f"INSERT INTO Epoca(nome, inicio, fim) VALUES ('{nome}', {inicio}, {fim});"
-        self.execute(query)
+        query = f"INSERT INTO Epoca(nome, inicio, fim) VALUES ('{nome}', '{inicio}', '{fim}');"
+        self.cursor.execute(query)
 
     def insert_team(self, equipa_id, equipa, epoca_inicio):
-        query = f'''
-            INSERT INTO Cidade(nome) VALUES ({equipa['Cidade']});
-            INSERT INTO Recinto(nome, morada, cidade) VALUES ({equipa['Recinto']}, {equipa['Morada']}, {equipa['Cidade']});
-            INSERT INTO Equipa(id, nome, logo, email, telefone, website, recinto) VALUES ({equipa_id}, {equipa['Nome']}, {equipa['Logo']}, {equipa['E-mail']}, {equipa['Telefone']}, {equipa['Website']}, {equipa['Recinto']});
+        queries = f'''
+            INSERT OR IGNORE INTO Cidade(nome) VALUES ('{equipa['Cidade']}');
+            INSERT OR IGNORE INTO Recinto(nome, morada, cidade) VALUES ('{equipa['Recinto']}', '{equipa['Morada']}', '{equipa['Cidade']}');
+            INSERT OR IGNORE INTO Equipa(id, nome, logo, email, telefone, website, recinto) VALUES ('{equipa_id}', '{equipa['Nome']}', '{equipa['Logo']}', '{equipa['E-mail']}', '{equipa['Telefone']}', '{equipa['Website']}', '{equipa['Recinto']}');
         '''
-        self.cursor.execute(query)
+        self.run_queries(queries)
 
         equipa_members = Fetcher.equipa_members(equipa_id)
 
@@ -30,15 +47,22 @@ class Database:
             member_id = member['CIP_NUMERO']
 
             collumn = 'Treinador' if member['ATLETA'] is None else 'Atleta'
-            query = f'INSERT INTO {collumn}(id, nome, nascimento) VALUES ({member_id}, {nome}, {nascimento}); '
+            query = f"INSERT OR IGNORE INTO {collumn}(id, nome, dataNascimento) VALUES ('{member_id}', '{nome}', '{nascimento}');"
             queries += query
-            query = f'INSERT INTO Inscricao{collumn} VALUES ({member_id}, {equipa_id}, {epoca_inicio}); '
+            query = f"INSERT OR IGNORE INTO Inscricao{collumn} VALUES ('{member_id}', '{equipa_id}', '{epoca_inicio}');"
             queries += query
 
-        self.cursor.execute(queries)
+        self.run_queries(queries)
+
+    def insert_jornada(self, jornada, inicio):
+        pass
+
+    def insert_team_in_epoca(self, equipa_id, epoca_inicio):
+        query = f'INSERT OR IGNORE INTO Classificacao(equipa, epoca) VALUES ({equipa_id}, {epoca_inicio});'
+        self.cursor.execute(query)
 
     def insert_arbitro(self, name, birthday):
-        query = f"INSERT INTO Arbitro(nome, nascimento) VALUES ('{name}', '{birthday}');"
+        query = f"INSERT INTO Arbitro(nome, dataNascimento) VALUES ('{name}', '{birthday}');"
         self.cursor.execute(query)
 
     def insert_jogo(self):

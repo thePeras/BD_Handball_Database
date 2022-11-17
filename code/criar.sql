@@ -8,8 +8,8 @@ CREATE TABLE Epoca(
 
 DROP TABLE IF EXISTS Jornada;
 CREATE TABLE Jornada(
-    id INTEGER AUTO_INCREMENT,
-    numero INTEGER, /* TODO: add a function check */
+    id INTEGER,
+    numero INTEGER,
     epoca INTEGER,
     CONSTRAINT Jornada_PK PRIMARY KEY (id),
     CONSTRAINT Epoca_FK FOREIGN KEY (epoca) REFERENCES Epoca(inicio)
@@ -17,7 +17,7 @@ CREATE TABLE Jornada(
 
 DROP TABLE IF EXISTS Jogo;
 CREATE TABLE Jogo(
-    id INTEGER AUTO_INCREMENT,
+    id INTEGER,
     inicio VARCHAR(20) NOT NULL,
     jornada INTEGER NOT NULL,
     visitada INTEGER NOT NULL,
@@ -38,8 +38,8 @@ CREATE TABLE Jogo(
 
 DROP TABLE IF EXISTS Recinto;
 CREATE TABLE Recinto(
-    id INTEGER AUTO_INCREMENT,
-    nome VARCHAR(50) NOT NULL,
+    id INTEGER,
+    nome VARCHAR(50) NOT NULL UNIQUE,
     morada VARCHAR(50) NOT NULL,
     cidade VARCHAR(20) NOT NULL,
     CONSTRAINT Recinto_PK PRIMARY KEY (id),
@@ -54,7 +54,7 @@ CREATE TABLE Cidade(
 
 DROP TABLE IF EXISTS Equipa;
 CREATE TABLE Equipa(
-    id INTEGER AUTO_INCREMENT,
+    id INTEGER,
     nome VARCHAR(50) NOT NULL,
     logo VARCHAR(50) NOT NULL,
     email VARCHAR(30),
@@ -67,7 +67,7 @@ CREATE TABLE Equipa(
 
 DROP TABLE IF EXISTS Atleta;
 CREATE TABLE Atleta(
-    id INTEGER AUTO_INCREMENT,
+    id INTEGER,
     nome VARCHAR(50) NOT NULL,
     dataNascimento VARCHAR(10) NOT NULL,
     CONSTRAINT Atleta_PK PRIMARY KEY (id)
@@ -75,7 +75,7 @@ CREATE TABLE Atleta(
 
 DROP TABLE IF EXISTS Treinador;
 CREATE TABLE Treinador(
-    id INTEGER AUTO_INCREMENT,
+    id INTEGER,
     nome VARCHAR(50) NOT NULL,
     dataNascimento VARCHAR(10) NOT NULL,
     CONSTRAINT Treinador_PK PRIMARY KEY (id)
@@ -83,7 +83,7 @@ CREATE TABLE Treinador(
 
 DROP TABLE IF EXISTS Arbitro;
 CREATE TABLE Arbitro(
-    id INTEGER AUTO_INCREMENT,
+    id INTEGER,
     nome VARCHAR(50) NOT NULL,
     dataNascimento VARCHAR(10) NOT NULL,
     CONSTRAINT Arbitro_PK PRIMARY KEY (id)
@@ -91,7 +91,7 @@ CREATE TABLE Arbitro(
 
 DROP TABLE IF EXISTS PausaTecnica;
 CREATE TABLE PausaTecnica(
-    id INTEGER AUTO_INCREMENT,
+    id INTEGER,
     minuto INTEGER CONSTRAINT minutoValido CHECK (minuto >= 0 AND minuto <= 60) NOT NULL,
     segundo INTEGER CONSTRAINT segundoValido CHECK (segundo >= 0 AND segundo <= 60) NOT NULL,
     equipa INTEGER NOT NULL,
@@ -103,7 +103,7 @@ CREATE TABLE PausaTecnica(
 
 DROP TABLE IF EXISTS Golo;
 CREATE TABLE Golo(
-    id INTEGER AUTO_INCREMENT,
+    id INTEGER,
     minuto INTEGER CONSTRAINT minutoValido CHECK (minuto >= 0 AND minuto <= 60) NOT NULL,
     segundo INTEGER CONSTRAINT segundoValido CHECK (segundo >= 0 AND segundo <= 60) NOT NULL,
     atleta INTEGER NOT NULL,
@@ -117,7 +117,7 @@ CREATE TABLE Golo(
 
 DROP TABLE IF EXISTS Interrupcao;
 CREATE TABLE Interrupcao(
-    id INTEGER AUTO_INCREMENT,
+    id INTEGER,
     minuto INTEGER CONSTRAINT minutoValido CHECK (minuto >= 0 AND minuto <= 60) NOT NULL,
     segundo INTEGER CONSTRAINT segundoValido CHECK (segundo >= 0 AND segundo <= 60) NOT NULL,
     tipo VARCHAR(50) NOT NULL CONSTRAINT tipoValido CHECK (tipo = "Infração" or tipo = "Advertência" or tipo = "Exclusão" or tipo = "Desqualificação" or tipo = "Expulsão"),
@@ -154,7 +154,7 @@ DROP TABLE IF EXISTS Classificacao;
 CREATE TABLE Classificacao(
     equipa INTEGER NOT NULL,
     epoca INTEGER NOT NULL,
-    pontos INTEGER NOT NULL,
+    pontos INTEGER DEFAULT 0,
     CONSTRAINT Classificacao_PK PRIMARY KEY (equipa, epoca),
     CONSTRAINT Equipa_FK FOREIGN KEY (equipa) REFERENCES Equipa(id)
     CONSTRAINT Epoca_FK FOREIGN KEY (epoca) REFERENCES Epoca(inicio)
