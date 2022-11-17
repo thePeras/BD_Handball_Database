@@ -3,14 +3,15 @@ import random
 class Generator:
     
     @staticmethod
-    def events():
-        # gerar golos
-        # gerar sanções
-        return []
-
-    @staticmethod
-    def timeout():
-        return str(random.randint(10, 60)) + ':' + str(random.randint(10, 60))
+    def time(times):
+        minuto = random.randint(0, 60)
+        segundo = random.randint(0, 60)
+        new_time = [minuto, segundo]
+        while(new_time not in times):
+            minuto = random.randint(0, 60)
+            segundo = random.randint(0, 60)
+            new_time = [minuto, segundo]
+        return new_time
 
     @staticmethod
     def birthday():

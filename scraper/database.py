@@ -38,8 +38,7 @@ class Database:
         '''
         self.run_queries(queries)
 
-        equipa_members = Fetcher.equipa_members(equipa_id)
-
+    def insert_team_members(self, equipa_members):
         queries = ""
         for member in equipa_members:
             nascimento = member['CIP_DATA_NASCIMENTO']
@@ -70,6 +69,18 @@ class Database:
     def insert_jogo(self, id, data, hora, jornada, epoca, visitada, visitante, a1, a2):
         query = f"INSERT INTO Jogo VALUES('{id}','{data}','{hora}','{jornada}','{epoca}','{visitada}',{visitante}, {a1}, {a2})"
         self.run_queries(query)
+
+    #TODO: 
+    def insert_golo(self, minuto, segundo, atleta, equipa, jogo_id):
+        pass 
+
+    #TODO:
+    def insert_interrupcao(self, ):
+        pass
+
+    #TODO:
+    def insert_pausaTecnica(self, ...):
+        pass
 
     def __del__(self):
         self.connection.commit()

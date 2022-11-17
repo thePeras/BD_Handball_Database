@@ -40,6 +40,11 @@ for inicio, epoca_id in epocas.items():
             database.insert_team(team_id, team, inicio)
             database.insert_team_in_epoca(team_id, inicio)
 
+        equipa_visitada_members = Fetcher.equipa_members(equipa_visitada)
+        equipa_visitante_members = Fetcher.equipa_members(equipa_visitante)
+        databse.insert_team_members(equipa_visitada_members)
+        databse.insert_team_members(equipa_visitante_members)
+
         # Inserir Jornada
         jornada = jogo['PJO_NUM_JORNADA']
         jornada_id = database.insert_jornada(jornada, inicio)
@@ -67,16 +72,42 @@ for inicio, epoca_id in epocas.items():
             arbitros_ids[1],
         )
 
-        print('UM JOGO INSERIDO!!')
+        equipas = [equipa_visitada, equipa_visitante]
+        equipa_visitada_atletas = filter(lambda member: member['ATLETA'] != None, equipa_visitada)
+        equipa_visitante_atletas = filter(lambda member: member['ATLETA'] != None, equipa_visitante)
+        aletas = [equipa_visitada_atletas, equipa_visitante_atletas]
+        
+        eventos_times = []
 
         # Inserir Golos
+        golos_casa = jogo['JOG_GOLOS_CASA']
+        golos_fora = jogo['JOG_GOLOS_FORA']
+        golos = [golos_casa, golos_fora]
 
-        # Inserir PausaTecnicas
+        for n_golos, equipa_id, atletas in zip(golos, equipas, aletas):
+            for i in range(n_golos)
+                # escolher um jogador aleatório
+                atleta = random.choice(atletas)
+                time = Generator.time(eventos_times)
+                database.insert_golo(time[0], time[1], atleta['CIP_NUMERO'], equipa, jogo['ID_PROVA_JOGO'])
+                eventos_times.append(time)
 
         # Inserir Interrupcoes
+        types = ["Infração", "Advertência", "Exclusão", "Desqualificação", "Expulsão"]
+        numero_interrupcoes = random.randint(0, 10) 
+        aletas_total = equipa_visitada_atletas + equipa_visitante_atletas
+        for i in range(numero_interrupcoes):
+            tipo_interrupcao = random.choice(types)
+            time = Generator.time(eventos_times)
+            atleta = random.choice(aletas_total)
+            databse.insert_interrupcao(time[0], time[1], tipo, atleta, jogo['ID_PROVA_JOGO'])
+            eventos_times.append(time)
+
+        # Inserir PausaTecnicas
         for team in [equipa_visitada, equipa_visitante]:
             for i in range(3):
-                timeout = Generator.timeout()
-                #insert timeout
+                time = Generator.time(eventos_times)
+                database.insert_pausaTecnica(times[0], times[1], team, jogo['ID_PROVA_JOGO'])
+                eventos_times.append(time)
 
 del database
