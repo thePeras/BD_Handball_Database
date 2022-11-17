@@ -2,6 +2,7 @@ from fetcher import Fetcher
 from parser import Parser
 from database import Database
 from generator import Generator
+import random
 
 epocas = {
     2021: 7278,
@@ -42,8 +43,8 @@ for inicio, epoca_id in epocas.items():
 
         equipa_visitada_members = Fetcher.equipa_members(equipa_visitada)
         equipa_visitante_members = Fetcher.equipa_members(equipa_visitante)
-        databse.insert_team_members(equipa_visitada_members)
-        databse.insert_team_members(equipa_visitante_members)
+        database.insert_team_members(equipa_visitada_members, equipa_visitada, inicio)
+        database.insert_team_members(equipa_visitante_members, equipa_visitante, inicio)
 
         # Inserir Jornada
         jornada = jogo['PJO_NUM_JORNADA']
@@ -73,8 +74,8 @@ for inicio, epoca_id in epocas.items():
         )
 
         equipas = [equipa_visitada, equipa_visitante]
-        equipa_visitada_atletas = filter(lambda member: member['ATLETA'] != None, equipa_visitada)
-        equipa_visitante_atletas = filter(lambda member: member['ATLETA'] != None, equipa_visitante)
+        equipa_visitada_atletas = list(filter(lambda member: member['ATLETA'] != None, equipa_visitada_members))
+        equipa_visitante_atletas = list(filter(lambda member: member['ATLETA'] != None, equipa_visitante_members))
         aletas = [equipa_visitada_atletas, equipa_visitante_atletas]
         
         eventos_times = []
@@ -85,11 +86,11 @@ for inicio, epoca_id in epocas.items():
         golos = [golos_casa, golos_fora]
 
         for n_golos, equipa_id, atletas in zip(golos, equipas, aletas):
-            for i in range(n_golos)
+            for _ in range(int(n_golos)): 
                 # escolher um jogador aleatório
                 atleta = random.choice(atletas)
                 time = Generator.time(eventos_times)
-                database.insert_golo(time[0], time[1], atleta['CIP_NUMERO'], equipa, jogo['ID_PROVA_JOGO'])
+                database.insert_golo(time[0], time[1], atleta['CIP_NUMERO'], equipa_id, jogo['ID_PROVA_JOGO'])
                 eventos_times.append(time)
 
         # Inserir Interrupcoes
@@ -100,14 +101,14 @@ for inicio, epoca_id in epocas.items():
             tipo_interrupcao = random.choice(types)
             time = Generator.time(eventos_times)
             atleta = random.choice(aletas_total)
-            databse.insert_interrupcao(time[0], time[1], tipo, atleta, jogo['ID_PROVA_JOGO'])
+            database.insert_interrupcao(time[0], time[1], tipo_interrupcao, atleta['CIP_NUMERO'], jogo['ID_PROVA_JOGO'])
             eventos_times.append(time)
 
         # Inserir PausaTecnicas
         for team in [equipa_visitada, equipa_visitante]:
             for i in range(3):
                 time = Generator.time(eventos_times)
-                database.insert_pausaTecnica(times[0], times[1], team, jogo['ID_PROVA_JOGO'])
+                database.insert_pausaTecnica(time[0], time[1], team, jogo['ID_PROVA_JOGO'])
                 eventos_times.append(time)
 
 del database

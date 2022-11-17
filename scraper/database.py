@@ -22,7 +22,7 @@ class Database:
         queries = queries.split(';')
         for query in queries:
             query+= ';'
-            print(query)
+            #print(query.strip())
             self.cursor.execute(query)
 
     def insert_epoca(self, nome, inicio):
@@ -38,7 +38,7 @@ class Database:
         '''
         self.run_queries(queries)
 
-    def insert_team_members(self, equipa_members):
+    def insert_team_members(self, equipa_members, equipa_id, epoca_inicio):
         queries = ""
         for member in equipa_members:
             nascimento = member['CIP_DATA_NASCIMENTO']
@@ -67,20 +67,20 @@ class Database:
         return self.cursor.lastrowid
 
     def insert_jogo(self, id, data, hora, jornada, epoca, visitada, visitante, a1, a2):
-        query = f"INSERT INTO Jogo VALUES('{id}','{data}','{hora}','{jornada}','{epoca}','{visitada}',{visitante}, {a1}, {a2})"
+        query = f"INSERT INTO Jogo VALUES('{id}','{data}','{hora}','{jornada}','{epoca}','{visitada}','{visitante}', '{a1}', '{a2}')"
         self.run_queries(query)
 
-    #TODO: 
     def insert_golo(self, minuto, segundo, atleta, equipa, jogo_id):
-        pass 
+        query = f"INSERT INTO Golo(minuto, segundo, atleta, equipa, jogo) VALUES('{minuto}', '{segundo}', '{atleta}', '{equipa}', '{jogo_id}')"
+        self.run_queries(query)       
 
-    #TODO:
-    def insert_interrupcao(self, ):
-        pass
+    def insert_pausaTecnica(self, minuto, segundo, equipa, jogo_id):
+        query = f"INSERT INTO PausaTecnica(minuto, segundo, equipa, jogo) VALUES('{minuto}', '{segundo}', '{equipa}', '{jogo_id}')"
+        self.run_queries(query)
 
-    #TODO:
-    def insert_pausaTecnica(self, ...):
-        pass
+    def insert_interrupcao(self, minuto, segundo, tipo, atleta, jogo_id):
+        query = f"INSERT INTO Interrupcao(minuto, segundo, tipo, atleta, jogo) VALUES('{minuto}', '{segundo}', '{tipo}', '{atleta}', '{jogo_id}')"
+        self.run_queries(query)
 
     def __del__(self):
         self.connection.commit()

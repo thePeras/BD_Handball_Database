@@ -88,18 +88,6 @@ CREATE TABLE Arbitro(
     CONSTRAINT Arbitro_PK PRIMARY KEY (id)
 );
 
-DROP TABLE IF EXISTS PausaTecnica;
-CREATE TABLE PausaTecnica(
-    id INTEGER,
-    minuto INTEGER CONSTRAINT minutoValido CHECK (minuto >= 0 AND minuto <= 60) NOT NULL,
-    segundo INTEGER CONSTRAINT segundoValido CHECK (segundo >= 0 AND segundo <= 60) NOT NULL,
-    equipa INTEGER NOT NULL,
-    jogo INTEGER NOT NULL,
-    CONSTRAINT PausaTecnica_PK PRIMARY KEY (id),
-    CONSTRAINT Equipa_FK FOREIGN KEY (equipa) REFERENCES Equipa(id),
-    CONSTRAINT Jogo_FK FOREIGN KEY (jogo) REFERENCES Jogo(id)
-);
-
 DROP TABLE IF EXISTS Golo;
 CREATE TABLE Golo(
     id INTEGER,
@@ -110,6 +98,18 @@ CREATE TABLE Golo(
     jogo INTEGER NOT NULL,
     CONSTRAINT Golo_PK PRIMARY KEY (id),
     CONSTRAINT Atleta_FK FOREIGN KEY (atleta) REFERENCES Atleta(id),
+    CONSTRAINT Equipa_FK FOREIGN KEY (equipa) REFERENCES Equipa(id),
+    CONSTRAINT Jogo_FK FOREIGN KEY (jogo) REFERENCES Jogo(id)
+);
+
+DROP TABLE IF EXISTS PausaTecnica;
+CREATE TABLE PausaTecnica(
+    id INTEGER,
+    minuto INTEGER CONSTRAINT minutoValido CHECK (minuto >= 0 AND minuto <= 60) NOT NULL,
+    segundo INTEGER CONSTRAINT segundoValido CHECK (segundo >= 0 AND segundo <= 60) NOT NULL,
+    equipa INTEGER NOT NULL,
+    jogo INTEGER NOT NULL,
+    CONSTRAINT PausaTecnica_PK PRIMARY KEY (id),
     CONSTRAINT Equipa_FK FOREIGN KEY (equipa) REFERENCES Equipa(id),
     CONSTRAINT Jogo_FK FOREIGN KEY (jogo) REFERENCES Jogo(id)
 );

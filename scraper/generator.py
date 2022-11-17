@@ -7,7 +7,7 @@ class Generator:
         minuto = random.randint(0, 60)
         segundo = random.randint(0, 60)
         new_time = [minuto, segundo]
-        while(new_time not in times):
+        while(new_time in times):
             minuto = random.randint(0, 60)
             segundo = random.randint(0, 60)
             new_time = [minuto, segundo]
