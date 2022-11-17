@@ -2,8 +2,8 @@
 Modelo Relacional
 
 - Epoca(nome, inicio, fim)
-- Jornada(id, numero, epoca -> Epoca)
-- Jogo(id, inicio, jornada -> Jornada, visitada -> Equipa, visitante -> Equipa, arbitro1 -> Arbitro, arbitro2 -> Arbitro, recinto -> Recinto)
+- Jornada(numero, epoca -> Epoca)
+- Jogo(id, data, hora_inicio, jornada_numero -> Jornada, epoca_inicio -> Jornada, visitada -> Equipa, visitante -> Equipa, arbitro1 -> Arbitro, arbitro2 -> Arbitro)
 - Recinto(id, nome, morada, cidade -> Cidade)
 - Cidade(nome)
 - Equipa(id, nome, logo, email, telefone, website, recinto -> Recinto)

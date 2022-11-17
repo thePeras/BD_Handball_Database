@@ -55,18 +55,21 @@ class Database:
         self.run_queries(queries)
 
     def insert_jornada(self, jornada, inicio):
-        pass
+        query = f"INSERT OR IGNORE INTO Jornada(numero, epoca) VALUES ('{jornada}', '{inicio}');"
+        self.run_queries(query)
 
     def insert_team_in_epoca(self, equipa_id, epoca_inicio):
         query = f'INSERT OR IGNORE INTO Classificacao(equipa, epoca) VALUES ({equipa_id}, {epoca_inicio});'
-        self.cursor.execute(query)
+        self.run_queries(query)
 
     def insert_arbitro(self, name, birthday):
         query = f"INSERT INTO Arbitro(nome, dataNascimento) VALUES ('{name}', '{birthday}');"
-        self.cursor.execute(query)
+        self.run_queries(query)
+        return self.cursor.lastrowid
 
-    def insert_jogo(self):
-        pass
+    def insert_jogo(self, id, data, hora, jornada, epoca, visitada, visitante, a1, a2):
+        query = f"INSERT INTO Jogo VALUES('{id}','{data}','{hora}','{jornada}','{epoca}','{visitada}',{visitante}, {a1}, {a2})"
+        self.run_queries(query)
 
     def __del__(self):
         self.connection.commit()

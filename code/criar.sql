@@ -8,30 +8,29 @@ CREATE TABLE Epoca(
 
 DROP TABLE IF EXISTS Jornada;
 CREATE TABLE Jornada(
-    id INTEGER,
-    numero INTEGER,
-    epoca INTEGER,
-    CONSTRAINT Jornada_PK PRIMARY KEY (id),
+    numero INTEGER NOT NULL,
+    epoca INTEGER NOT NULL,
+    CONSTRAINT Jornada_PK PRIMARY KEY (numero, epoca),
     CONSTRAINT Epoca_FK FOREIGN KEY (epoca) REFERENCES Epoca(inicio)
 );
 
 DROP TABLE IF EXISTS Jogo;
 CREATE TABLE Jogo(
     id INTEGER,
-    inicio VARCHAR(20) NOT NULL,
-    jornada INTEGER NOT NULL,
+    data VARCHAR(20) NOT NULL,
+    hora_de_inicio VARCHAR(5) NOT NULL,
+    jornada_numero INTEGER NOT NULL,
+    epoca_inicio INTEGER NOT NULL,
     visitada INTEGER NOT NULL,
     visitante INTEGER NOT NULL,
     arbitro1 INTEGER NOT NULL,
     arbitro2 INTEGER NOT NULL,
-    recinto INTEGER NOT NULL,
     CONSTRAINT Jogo_PK PRIMARY KEY (id),
-    CONSTRAINT Jornada_FK FOREIGN KEY (jornada) REFERENCES Jornada(id),
+    CONSTRAINT Jornada_FK FOREIGN KEY (jornada_numero, epoca_inicio) REFERENCES Jornada(numero, epoca),
     CONSTRAINT Equipa_FK1 FOREIGN KEY (visitada) REFERENCES Equipa(id),
     CONSTRAINT Equipa_FK2 FOREIGN KEY (visitante) REFERENCES Equipa(id),
     CONSTRAINT Arbitro_FK1 FOREIGN KEY (arbitro1) REFERENCES Arbitro(id),
     CONSTRAINT Arbitro_FK2 FOREIGN KEY (arbitro2) REFERENCES Arbitro(id),
-    CONSTRAINT Recinto_FK FOREIGN KEY (recinto) REFERENCES Recinto(id),
     CHECK (visitada != visitante)
     CHECK (arbitro1 != arbitro2)
 );

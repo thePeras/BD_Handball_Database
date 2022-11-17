@@ -44,13 +44,30 @@ for inicio, epoca_id in epocas.items():
         jornada = jogo['PJO_NUM_JORNADA']
         jornada_id = database.insert_jornada(jornada, inicio)
 
+        # Inserir Jogo
         jogo_info = Fetcher.jogo(jogo['ID_PROVA_JOGO'])
         arbitros = Parser.arbitos(jogo_info)
 
         # Inserir Árbitros
+        arbitros_ids = []
         for arbitro in arbitros:
             birthay = Generator.birthday()
-            database.insert_arbitro(arbitro, birthay)
+            arbitro_id = database.insert_arbitro(arbitro, birthay)
+            arbitros_ids.append(arbitro_id)
+
+        database.insert_jogo(
+            jogo['ID_PROVA_JOGO'],
+            jogo['JOG_DATA'],
+            jogo['JOG_HORA'],
+            jogo['PJO_NUM_JORNADA'],
+            inicio,
+            equipa_visitada,
+            equipa_visitante, 
+            arbitros_ids[0],
+            arbitros_ids[1],
+        )
+
+        print('UM JOGO INSERIDO!!')
 
         # Inserir Golos
 
