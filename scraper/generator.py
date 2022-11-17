@@ -15,4 +15,7 @@ class Generator:
 
     @staticmethod
     def birthday():
-        return '12-02-1998'
+        year = random.randint(1970, 1995)
+        month = random.randint(1, 12)
+        day = random.randint(1, 28)
+        return f'{year}-{month}-{day}'

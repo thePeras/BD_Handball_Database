@@ -37,11 +37,10 @@ CREATE TABLE Jogo(
 
 DROP TABLE IF EXISTS Recinto;
 CREATE TABLE Recinto(
-    id INTEGER,
-    nome VARCHAR(50) NOT NULL UNIQUE,
+    nome VARCHAR(50) NOT NULL,
     morada VARCHAR(50) NOT NULL,
     cidade VARCHAR(20) NOT NULL,
-    CONSTRAINT Recinto_PK PRIMARY KEY (id),
+    CONSTRAINT Recinto_PK PRIMARY KEY (nome),
     CONSTRAINT Cidade_FK FOREIGN KEY (cidade) REFERENCES Cidade(nome)
 );
 
@@ -59,9 +58,9 @@ CREATE TABLE Equipa(
     email VARCHAR(30),
     telefone VARCHAR(20),
     website VARCHAR(30),
-    recinto INTEGER,
+    recinto VARCHAR(50),
     CONSTRAINT Equipa_PK PRIMARY KEY (id),
-    CONSTRAINT Recinto_FK FOREIGN KEY (recinto) REFERENCES Recinto(id)
+    CONSTRAINT Recinto_FK FOREIGN KEY (recinto) REFERENCES Recinto(nome)
 );
 
 DROP TABLE IF EXISTS Atleta;

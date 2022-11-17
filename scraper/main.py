@@ -2,7 +2,12 @@ from fetcher import Fetcher
 from parser import Parser
 from database import Database
 from generator import Generator
+
 import random
+
+# [X] tratar do birthday dos arbitros
+# [X] tratar dos arbitros repetidos
+# [x] corrigir o recinto das equipas tem de ser um inteiro e não uma string
 
 epocas = {
     2021: 7278,
@@ -24,13 +29,19 @@ epocas = {
 
 database = Database();
 
+
 for inicio, epoca_id in epocas.items():
     # Inserir época
     jogos = Fetcher.epoca_jogos(epoca_id)
     epoca_name = jogos[0]['PRO_ABREVIATURA']
     database.insert_epoca(epoca_name, inicio)
 
+    n_jogos = len(jogos)
+    counter = 0
     for jogo in jogos:
+        print(f'Jogo {counter}/{n_jogos}')
+        counter += 1
+
         equipa_visitada = jogo['ID_OBJECTO_CASA']
         equipa_visitante = jogo['ID_OBJECTO_FORA']
 

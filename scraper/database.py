@@ -62,6 +62,12 @@ class Database:
         self.run_queries(query)
 
     def insert_arbitro(self, name, birthday):
+        query = f"SELECT id FROM Arbitro WHERE nome='{name}'"
+        self.cursor.execute(query)
+        result = self.cursor.fetchone()
+        if result != None: 
+            return result[0]
+
         query = f"INSERT INTO Arbitro(nome, dataNascimento) VALUES ('{name}', '{birthday}');"
         self.run_queries(query)
         return self.cursor.lastrowid
