@@ -4,6 +4,7 @@ CREATE TABLE Epoca(
     inicio INTEGER CONSTRAINT inicioValido CHECK (inicio >= 2007 AND inicio <= 3000) NOT NULL,
     fim INTEGER CONSTRAINT fimValido CHECK (fim >= 2008 AND fim <= 3000) NOT NULL,
     CONSTRAINT Epoca_PK PRIMARY KEY (inicio)
+    CONSTRAINT validEpoca CHECK (fim > inicio)
 );
 
 DROP TABLE IF EXISTS Jornada;
@@ -35,30 +36,30 @@ CREATE TABLE Jogo(
     CHECK (arbitro1 != arbitro2)
 );
 
-DROP TABLE IF EXISTS Recinto;
-CREATE TABLE Recinto(
-    nome VARCHAR(50) NOT NULL,
-    morada VARCHAR(50) NOT NULL,
-    cidade VARCHAR(20) NOT NULL,
-    CONSTRAINT Recinto_PK PRIMARY KEY (nome),
-    CONSTRAINT Cidade_FK FOREIGN KEY (cidade) REFERENCES Cidade(nome) ON UPDATE CASCADE
-);
-
 DROP TABLE IF EXISTS Cidade;
 CREATE TABLE Cidade(
     nome VARCHAR(20),
     CONSTRAINT Cidade_PK PRIMARY KEY (nome)
 );
 
+DROP TABLE IF EXISTS Recinto;
+CREATE TABLE Recinto(
+    nome VARCHAR(50) NOT NULL,
+    morada VARCHAR(50) NOT NULL UNIQUE,
+    cidade VARCHAR(20) NOT NULL,
+    CONSTRAINT Recinto_PK PRIMARY KEY (nome),
+    CONSTRAINT Cidade_FK FOREIGN KEY (cidade) REFERENCES Cidade(nome) ON UPDATE CASCADE
+);
+
 DROP TABLE IF EXISTS Equipa;
 CREATE TABLE Equipa(
     id INTEGER,
-    nome VARCHAR(50) NOT NULL,
-    logo VARCHAR(50) NOT NULL,
-    email VARCHAR(30),
-    telefone VARCHAR(20),
-    website VARCHAR(30),
-    recinto VARCHAR(50),
+    nome VARCHAR(50) NOT NULL UNIQUE,
+    logo VARCHAR(50) NOT NULL UNIQUE,
+    email VARCHAR(30) UNIQUE,
+    telefone VARCHAR(20) UNIQUE,
+    website VARCHAR(30) UNIQUE,
+    recinto VARCHAR(50) UNIQUE,
     CONSTRAINT Equipa_PK PRIMARY KEY (id),
     CONSTRAINT Recinto_FK FOREIGN KEY (recinto) REFERENCES Recinto(nome) ON UPDATE CASCADE
 );
