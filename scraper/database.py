@@ -88,6 +88,11 @@ class Database:
         query = f"INSERT INTO Interrupcao(minuto, segundo, tipo, atleta, jogo) VALUES('{minuto}', '{segundo}', '{tipo}', '{atleta}', '{jogo_id}')"
         self.run_queries(query)
 
+    def add_points(self, equipa, epoca, pontos):
+        queries = f"INSERT OR IGNORE INTO Classificacao(equipa, epoca) VALUES('{equipa}', '{epoca}');"
+        queries += f"UPDATE Classificacao SET pontos = pontos + {pontos} WHERE equipa = {equipa} AND epoca = {epoca};"
+        self.run_queries(queries)
+
     def __del__(self):
         self.connection.commit()
         self.connection.close()

@@ -4,8 +4,8 @@ from bs4 import BeautifulSoup
 class Fetcher:
 
     @staticmethod
-    def epoca_jogos(id_epoca):
-        url = f'https://ws.fpa.pt/index.php/getResultadosCalendario/{id_epoca}/18149'
+    def epoca_jogos(epoca_url):
+        url = f'https://ws.fpa.pt/index.php/getResultadosCalendario/{epoca_url}'
         return requests.get(url).json()
 
     @staticmethod
