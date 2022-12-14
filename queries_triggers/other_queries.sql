@@ -19,4 +19,12 @@ from(
 )
 where NumeroEquipas > 1;
 
+/* Resultado de um jogo */
+
+select j.id, count(*) as golos, e.nome
+from Jogo j
+join Golo g on g.jogo = j.id
+join equipa e on e.id = g.equipa
+where j.id = 227988
+group by g.equipa
 
