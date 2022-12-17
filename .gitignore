@@ -3,3 +3,4 @@
 .vscode/*
 .obsidian/
 /scraper/__pycache__/
+database.session.sql

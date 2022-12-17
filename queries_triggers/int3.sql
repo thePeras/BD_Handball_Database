@@ -1,6 +1,8 @@
+/*
 .mode columns 
 .headers on 
 .nullvalue NULL
+*/
 
 --- Jogos que aconteceram numa determinada cidade
 

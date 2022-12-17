@@ -1,6 +1,8 @@
+/*
 .mode columns 
 .headers on 
 .nullvalue NULL
+*/
 
 -- Melhores 3 marcadores da época 2021
 
