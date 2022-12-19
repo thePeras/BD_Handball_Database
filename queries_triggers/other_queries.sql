@@ -49,3 +49,15 @@ join equipa e on e.id = g.equipa
 where j.id = 227988
 group by g.equipa
 
+/* Top 5 marcadores de uma época */
+
+select a.nome, count(*) as golos
+from Atleta a
+join Golo g on g.atleta = a.id
+join Jogo j on j.id = g.jogo
+join Jornada jo on jo.numero = j.jornada and jo.epoca = j.epoca
+where jo.epoca = '2019'
+group by a.nome
+order by golos desc
+limit 5;
+
