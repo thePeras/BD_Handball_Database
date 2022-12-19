@@ -1,5 +1,4 @@
---- TODO: Verificar!
---- TODO: Mudar ordem do ficheiro povoar.sql para que este trigger funcione
+--- Verificar se o número da jornada é válido
 
 DROP TRIGGER IF EXISTS VerificarNrJornadas;
 CREATE TRIGGER VerificarNrJornadas
@@ -15,3 +14,6 @@ WHEN (
 BEGIN
     SELECT RAISE(ABORT, 'O número da jornada não bate certo consoante o número de equipas dessa época');
 END;
+
+--- TODO: Verificar!
+--- TODO: Mudar ordem do ficheiro povoar.sql para que este trigger funcione
