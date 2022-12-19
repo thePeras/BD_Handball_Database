@@ -14,4 +14,4 @@ JOIN Interrupcao i on i.jogo = j.id
 WHERE j.epoca = '2019'
 GROUP BY a.id
 ORDER BY Interrupcoes DESC
-LIMIT 6;
+LIMIT 1;

@@ -1,4 +1,5 @@
 import random
+from datetime import datetime
 
 class Generator:
     
@@ -18,4 +19,6 @@ class Generator:
         year = random.randint(1970, 1995)
         month = random.randint(1, 12)
         day = random.randint(1, 28)
+        month = month < 10 ? '0' + month : month
+        day = day < 10 ? '0' + day : day
         return f'{year}-{month}-{day}'
