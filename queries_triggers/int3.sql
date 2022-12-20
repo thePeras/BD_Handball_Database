@@ -4,9 +4,9 @@
 .nullvalue NULL
 */
 
---- Ordem cronológica de eventos de um jogo
+-- Ordem cronológica de eventos de um jogo
 
-select g.minuto, g.segundo, 'Golo' as evento, a.nome as 'Jogador', e.nome as 'Equipa'
+select g.minuto MINUTO, g.segundo SEGUNDO, 'Golo' as EVENTO, a.nome as JOGADOR, e.nome as EQUIPA
 from Jogo j
 join Golo g on g.jogo = j.id
 join Atleta a on a.id = g.atleta

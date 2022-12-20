@@ -4,7 +4,7 @@
 .nullvalue NULL
 */
 
---- Estatísticas de uma equipa numa época (número de golos, número de cada tipo de interrupção)
+-- Estatísticas de uma equipa numa época (número de golos, número de cada tipo de interrupção)
 
 DROP VIEW IF EXISTS interrupções;
 CREATE VIEW interrupções AS
@@ -16,15 +16,15 @@ JOIN Equipa ON Equipa.id = InscricaoAtleta.equipa;
 
 
 SELECT 
-    DISTINCT epocaInício, 
-    epocaFim, 
-    nomeEquipa, 
-    Golos, 
-    Infrações, 
-    Expulsões, 
-    Advertências, 
-    Exclusões, 
-    Desqualificações
+    DISTINCT epocaInício INCIO_EPOCA, 
+    epocaFim FIM_EPOCA, 
+    nomeEquipa EQUIPA, 
+    Golos GOLOS, 
+    Infrações INFRACOES, 
+    Expulsões EXPULSOES, 
+    Advertências ADVERTENCIAS, 
+    Exclusões EXCLUSOES, 
+    Desqualificações DESQUALIFICACOES
 FROM 
 
 (SELECT Epoca.inicio as epocaInício, Epoca.fim as epocaFim, Equipa.nome as nomeEquipa, Count(*) as Golos 
@@ -62,4 +62,5 @@ where ex.equipa = nomeEquipa
 and inf.equipa = nomeEquipa 
 and adv.equipa = nomeEquipa 
 and exc.equipa = nomeEquipa
-and desq.equipa = nomeEquipa;
+and desq.equipa = nomeEquipa
+order by 1,3;

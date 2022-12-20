@@ -6,19 +6,7 @@
 
 -- resultado do jogo com id: 207454
 
-/*
-Tabela final:
-Data | Visitada | Golos Visitada | Visitante | Golos Visitante
-
-Tabela 1:
-IDjogo | Data | Visitada | Golos Visitada
-
-Tabela 2:
-IDjogo | Data | Visitante | Golos Visitante
-
-*/
-
-select t1.data, t1.visitada, t1.golos_visitada, t2.visitante, t2.golos_visitante
+select t1.data DATA, t1.visitada VISITADA, t1.golos_visitada G_VISITADA, t2.visitante VISITANTE, t2.golos_visitante G_VISITANTE
 from (
     select j.id as jogo, j.data as data, e.nome as visitada, count(*) as golos_visitada
     from Jogo j
