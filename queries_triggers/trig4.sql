@@ -1,49 +1,45 @@
--- Verificar se o jogador está a jogar o jogo em que marcou o golo
+-- Verificar se o atleta que marcou o golo pertence a uma das equipas que está a jogar o jogo
 
-DROP TRIGGER IF EXISTS VerificarGoloJogador;
-CREATE TRIGGER VerificarGoloJogador
+DROP TRIGGER IF EXISTS VerificarGoloAtleta;
+CREATE TRIGGER VerificarGoloAtleta
 BEFORE INSERT ON Golo
 WHEN NOT EXISTS(
     SELECT * FROM Jogo
     WHERE id = NEW.jogo
     AND (
-        SELECT equipa FROM InscricaoAtleta
-        WHERE atleta = NEW.jogador
+        SELECT count(*) FROM InscricaoAtleta
+        WHERE atleta = NEW.atleta
         AND epoca = (
-            SELECT Jornada.epoca 
+            SELECT Jogo.epoca 
             FROM Jogo
-            JOIN Jornada ON Jornada.id = Jogo.jornada
             WHERE Jogo.id = NEW.jogo
-        ) in (equipa1, equipa2)
-    ) = 0
+        ) 
+        AND equipa in (visitada, visitante)
+    ) = 1
 )
 BEGIN
-    SELECT RAISE(ABORT, 'O jogador não está a jogar esse jogo');
+    SELECT RAISE(ABORT, 'O atleta não está a jogar esse jogo');
 END;
 
---- TODO: Verificar!
+-- Verificar se o atleta da interrupção está a jogar o jogo em que ocorreu a interrupção
 
--- Verificar se o jogador da interrupção está a jogar o jogo em que ocorreu a interrupção
-
-DROP TRIGGER IF EXISTS VerificarInterrupcaoJogador;
-CREATE TRIGGER VerificarInterrupcaoJogador
+DROP TRIGGER IF EXISTS VerificarInterrupcaoAtleta;
+CREATE TRIGGER VerificarInterrupcaoAtleta
 BEFORE INSERT ON Interrupcao
 WHEN NOT EXISTS(
     SELECT * FROM Jogo
     WHERE id = NEW.jogo
     AND (
-        SELECT equipa FROM InscricaoAtleta
+        SELECT count(*) FROM InscricaoAtleta
         WHERE atleta = NEW.atleta
         AND epoca = (
-            SELECT Jornada.epoca 
+            SELECT Jogo.epoca 
             FROM Jogo
-            JOIN Jornada ON Jornada.id = Jogo.jornada
             WHERE Jogo.id = NEW.jogo
-        ) in (equipa1, equipa2)
-    ) = 0
+        ) 
+        AND equipa in (visitada, visitante)
+    ) = 1
 )
 BEGIN
-    SELECT RAISE(ABORT, 'O jogador não está a jogar esse jogo');
+    SELECT RAISE(ABORT, 'O atleta não está a jogar esse jogo');
 END;
-
---- TODO: Verificar!

@@ -6,13 +6,11 @@ BEFORE INSERT ON Golo
 WHEN NOT EXISTS(
     SELECT * FROM Jogo
     WHERE id = NEW.jogo
-    AND (equipa1 = NEW.equipa OR equipa2 = NEW.equipa)
+    AND (visitada = NEW.equipa OR visitante = NEW.equipa)
 )
 BEGIN
     SELECT RAISE(ABORT, 'A equipa não está a jogar este jogo');
 END;
-
---- TODO: Verificar!
 
 --- Verificar se a equipa está a jogar o jogo ao inserir uma pausa técnica
 
@@ -22,10 +20,8 @@ BEFORE INSERT ON PausaTecnica
 WHEN NOT EXISTS(
     SELECT * FROM Jogo
     WHERE id = NEW.jogo
-    AND (equipa1 = NEW.equipa OR equipa2 = NEW.equipa)
+    AND (visitada = NEW.equipa OR visitante = NEW.equipa)
 )
 BEGIN
     SELECT RAISE(ABORT, 'A equipa não está a jogar este jogo');
 END;
-
---- TODO: Verificar!
