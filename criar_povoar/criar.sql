@@ -43,17 +43,6 @@ CREATE TABLE Equipa(
     CONSTRAINT Recinto_FK FOREIGN KEY (recinto) REFERENCES Recinto(nome) ON UPDATE CASCADE
 );
 
-DROP TABLE IF EXISTS Classificacao;
-CREATE TABLE Classificacao(
-    equipa INTEGER NOT NULL,
-    epoca INTEGER NOT NULL,
-    pontos INTEGER DEFAULT 0,
-    CONSTRAINT pontosValido CHECK (pontos >= 0),
-    CONSTRAINT Classificacao_PK PRIMARY KEY (equipa, epoca),
-    CONSTRAINT Equipa_FK FOREIGN KEY (equipa) REFERENCES Equipa(id) ON UPDATE CASCADE ON DELETE CASCADE,
-    CONSTRAINT Epoca_FK FOREIGN KEY (epoca) REFERENCES Epoca(inicio) ON UPDATE CASCADE ON DELETE CASCADE
-);
-
 DROP TABLE IF EXISTS Atleta;
 CREATE TABLE Atleta(
     id INTEGER,
