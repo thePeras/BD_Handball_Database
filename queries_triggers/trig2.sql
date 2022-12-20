@@ -3,7 +3,7 @@
 DROP TRIGGER IF EXISTS VerificarInscricaoJogador;
 CREATE TRIGGER VerificarInscricaoJogador
 BEFORE INSERT ON InscricaoAtleta
-WHEN NOT EXISTS(
+WHEN EXISTS(
     SELECT * FROM InscricaoAtleta
     WHERE atleta = NEW.atleta
     AND epoca = NEW.epoca
@@ -11,5 +11,3 @@ WHEN NOT EXISTS(
 BEGIN
     SELECT RAISE(ABORT, 'O jogador já está inscrito numa equipa');
 END;
-
---- TODO: Verificar!
