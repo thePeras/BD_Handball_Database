@@ -10,4 +10,4 @@ resultados jornada a jornada, marcadores dos golos, equipas que jogam em casa e 
 como visitante. Pretende-se saber o estado do campeonato em qualquer jornada, as equipas
 em condições de ir às competições europeias e em risco de despromoção.
 
-![UML_Scheme](schema/Andebol_UML.svg "UML")
+![UML_Scheme](schema/UML.jpg "UML")
