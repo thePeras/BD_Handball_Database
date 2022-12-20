@@ -6,7 +6,7 @@
 
 -- Média de golos por jogo em cada época 
 
-select Epoca,round(avg(Golos),1) as Média_Golos
+select Epoca EPOCA, round(avg(Golos),1) as GOLOS
 from 
     (select Epoca,count(*) as Golos 
     from Jogo,Golo 

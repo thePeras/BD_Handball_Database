@@ -5,7 +5,8 @@
 */
 
 -- Média de golos por época
-select Atleta.nome,Count(*)/Epocas as Média_Golos,Epocas
+
+select Atleta.nome JOGADOR ,Count(*)/Epocas as GOLOS, Epocas NUM_EPOCAS
 from
     (SELECT Atleta ,count(*) as Epocas
     from Atleta,InscricaoAtleta
@@ -14,4 +15,5 @@ from
 AS ne,Golo,Atleta 
 where(ne.atleta = Golo.atleta and Golo.atleta = Atleta.id ) 
 GROUP by golo.Atleta 
-order by Epocas desc, Média_Golos desc;
+order by Epocas desc, 2 desc
+limit 5;
