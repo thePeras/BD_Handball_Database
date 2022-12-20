@@ -4,7 +4,7 @@
 .nullvalue NULL
 */
 
--- Melhores 3 marcadores da época (2020)
+-- Melhores 5 marcadores da época (2020)
 
 SELECT a.nome as JOGADOR, count(*) AS NUM_GOLOS
 FROM Atleta a

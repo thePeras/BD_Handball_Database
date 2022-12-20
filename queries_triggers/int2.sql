@@ -6,7 +6,7 @@
 
 --- Todos os dérbis
 
-select DISTINCT jogo.data,Cidade.nome,e_visitada.nome visitada, e_visitante.nome visitante
+select DISTINCT jogo.data,Cidade.nome as cidade,e_visitada.nome visitada, e_visitante.nome visitante
 from jogo,Recinto,Cidade
 JOIN Equipa e_visitada on Jogo.visitada = e_visitada.id
 JOIN Equipa e_visitante ON Jogo.visitante = e_visitante.id
