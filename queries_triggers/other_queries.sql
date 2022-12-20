@@ -60,4 +60,3 @@ where jo.epoca = '2019'
 group by a.nome
 order by golos desc
 limit 5;
-

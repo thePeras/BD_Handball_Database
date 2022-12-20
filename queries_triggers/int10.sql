@@ -4,7 +4,7 @@
 .nullvalue NULL
 */
 
---- A idade dos árbitros com mais interrupções numa época (2019)
+-- A idade dos árbitros com mais interrupções numa época (2019)
 
 SELECT a.nome AS Nome, count(*) AS Interrupcoes, 
 FLOOR((julianday('now') - julianday(a.dataNascimento)) / 365.25) AS Idade, a.dataNascimento 
