@@ -18,46 +18,122 @@ Interrupcao(id, minuto, segundo, tipo, atleta → Atleta, jogo → Jogo)
 
 */
 
+drop view if exists resultados;
+create view resultados as
+select t1.data DATA, t1.visitada VISITADA, t1.golos_visitada G_VISITADA, t2.visitante VISITANTE, t2.golos_visitante G_VISITANTE
+from (
+    select j.id as jogo, j.data as data, e.nome as visitada, count(*) as golos_visitada
+    from Epoca ep
+    join Jogo j on j.epoca = ep.inicio
+    join Golo g on g.jogo = j.id
+    join equipa e on e.id = g.equipa
+    where e.id = j.visitada and ep.inicio = 2021
+    group by j.id, e.id
+) as t1
+join (
+    select j.id as jogo, j.data as data, e.nome as visitante, count(*) as golos_visitante
+    from Epoca ep
+    join Jogo j on j.epoca = ep.inicio
+    join Golo g on g.jogo = j.id
+    join equipa e on e.id = g.equipa
+    where e.id = j.visitante and ep.inicio = 2021
+    group by j.id, e.id
+) as t2 on t1.jogo = t2.jogo;
 
-/* Todas as equipas da cidade de Lisboa */
+-- using the view resultados, i want a view that shows the number of wins for each team 
 
-select e.nome as EQUIPA
-from Equipa e 
-join Recinto r on e.recinto = r.nome
-join Cidade c on c.nome = r.cidade
-where c.nome = 'Lisboa';
+drop view if exists vitoriasCasaFora;
+create view vitoriasCasaFora as
+select t1.visitada as equipa, count(*) as vitorias
+from resultados t1
+where t1.g_visitada > t1.g_visitante
+group by t1.visitada
+union
+select t2.visitante as equipa, count(*) as vitorias
+from resultados t2
+where t2.g_visitada < t2.g_visitante
+group by t2.visitante;
 
-/* Cidades com mais de uma equipa */
+-- using vitoriasCasaFora, i want to sum both numbers for each team
 
-select Cidade, NumeroEquipas
-from(
-	-- num equipas por cidade
-    select c.nome as Cidade, count(*) as NumeroEquipas
-    from Cidade c
-    join Recinto r on r.cidade = c.nome
-    join Equipa e on e.recinto = r.nome
-    group by 1
-)
-where NumeroEquipas > 1;
+drop view if exists vitorias;
+create view vitorias as
+select equipa, sum(vitorias) as vitorias
+from vitoriasCasaFora
+group by equipa;
 
-/* Resultado de um jogo */
+-- now i want a table with the number of draws for each team
 
-select j.id, count(*) as golos, e.nome
-from Jogo j
-join Golo g on g.jogo = j.id
-join equipa e on e.id = g.equipa
-where j.id = 227988
-group by g.equipa
+drop view if exists empatesCasaFora;
+create view empatesCasaFora as
+select t1.visitada as equipa, count(*) as empates
+from resultados t1
+where t1.g_visitada = t1.g_visitante
+group by t1.visitada
+union
+select t2.visitante as equipa, count(*) as empates
+from resultados t2
+where t2.g_visitada = t2.g_visitante
+group by t2.visitante;
 
-/* A idade do árbitro com mais interrupções numa época */
 
-select a.nome, a.dataNascimento, count(*) as interrupcoes
-from Arbitro a
-join Interrupcao i on i.arbitro = a.id
-join Jogo j on j.id = i.jogo
-where j.epoca = '2020'
-group by a.id
-order by interrupcoes desc
-limit 1;
+-- using empatesCasaFora, i want to sum both numbers for each team
 
+drop view if exists empates;
+create view empates as
+select equipa, sum(empates) as empates
+from empatesCasaFora
+group by equipa;
+
+
+-- now i want a table with the number of losses for each team
+
+drop view if exists derrotasCasaFora;
+create view derrotasCasaFora as
+select t1.visitada as equipa, count(*) as derrotas
+from resultados t1
+where t1.g_visitada < t1.g_visitante
+group by t1.visitada
+union
+select t2.visitante as equipa, count(*) as derrotas
+from resultados t2
+where t2.g_visitada > t2.g_visitante
+group by t2.visitante;
+
+-- using derrotasCasaFora, i want to sum both numbers for each team
+
+drop view if exists derrotas;
+create view derrotas as
+select equipa, sum(derrotas) as derrotas
+from derrotasCasaFora
+group by equipa;
+
+-- for each game, a win is worth 3 points, a draw is worth 2 point and a loss is worth 1 points
+-- i want a table with the number of points for each team, using views vitorias, empates and derrotas
+-- if some team is not in one of these views, it means that it has 0 points just for that category
+
+drop view if exists pontos;
+create view pontos as
+select v.equipa, (v.vitorias * 3) + (e.empates * 2) + (d.derrotas * 1) as pontos
+from vitorias v
+join empates e on e.equipa = v.equipa
+join derrotas d on d.equipa = v.equipa
+union
+select e.equipa, (v.vitorias * 3) + (e.empates * 2) + (d.derrotas * 1) as pontos
+from vitorias v
+right join empates e on e.equipa = v.equipa
+join derrotas d on d.equipa = v.equipa
+union
+select d.equipa, (v.vitorias * 3) + (e.empates * 2) + (d.derrotas * 1) as pontos
+from vitorias v
+join empates e on e.equipa = v.equipa
+right join derrotas d on d.equipa = v.equipa
+union
+select v.equipa, (v.vitorias * 3) + (e.empates * 2) + (d.derrotas * 1) as pontos
+from vitorias v
+right join empates e on e.equipa = v.equipa
+right join derrotas d on d.equipa = v.equipa;
+
+
+SELECT * FROM pontos;
 
