@@ -1,10 +1,8 @@
-/*
+
 .mode columns 
 .headers on 
 .nullvalue NULL
-*/
 
--- idade do 3º melhor marcador da época 2021
 
 select a.id as ID_JOG, a.nome as NOME, a.dataNascimento as DATA_NASC,  FLOOR((julianday('now') - julianday(a.dataNascimento)) / 365.25) AS IDADE
 from atleta a
