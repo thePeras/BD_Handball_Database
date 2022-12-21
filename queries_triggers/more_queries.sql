@@ -135,12 +135,6 @@ select e.equipa as equipa, COALESCE(sum(e.derrotas), 0) as derrotas
 from derrotas2 e
 group by e.equipa;
 
-
--- now i want a final table Classificacao with all the information
--- and the number of points for each team
--- 3 points win, 2 points draw, 1 point loss
--- order by points desc
-
 drop view if exists Classificacao;
 create view Classificacao as
 select v.equipa as equipa, v.vitorias as vitorias, e.empates as empates, d.derrotas as derrotas, (v.vitorias * 3) + (e.empates * 2) + (d.derrotas * 1) as pontos
