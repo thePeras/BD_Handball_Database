@@ -1,10 +1,7 @@
-/*
+
 .mode columns 
 .headers on 
 .nullvalue NULL
-*/
-
--- Estatísticas de uma equipa numa época (número de golos, número de cada tipo de interrupção)
 
 DROP VIEW IF EXISTS interrupções;
 CREATE VIEW interrupções AS

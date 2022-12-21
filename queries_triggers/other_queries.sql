@@ -60,3 +60,4 @@ group by a.id
 order by interrupcoes desc
 limit 1;
 
+

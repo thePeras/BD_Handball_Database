@@ -1,10 +1,7 @@
-/*
+
 .mode columns 
 .headers on 
 .nullvalue NULL
-*/
-
---- O jogo com mais interrupções (Exclusão) de uma época (2019)
 
 SELECT j.data DATA, e_visitada.nome AS VISITADA, e_visitante.nome AS VISITANTE, count(*) AS NUM_EXC
 FROM Jogo j

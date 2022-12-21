@@ -1,10 +1,8 @@
-/*
+
 .mode columns 
 .headers on 
 .nullvalue NULL
-*/
 
--- Todos os dérbis
 
 select DISTINCT jogo.data as DATA,Cidade.nome as CIDADE,e_visitada.nome VISITADA, e_visitante.nome VISITANTE
 from jogo,Recinto,Cidade

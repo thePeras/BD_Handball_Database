@@ -1,10 +1,7 @@
-/*
+
 .mode columns 
 .headers on 
 .nullvalue NULL
-*/
-
--- resultado do jogo com id: 207454
 
 select t1.data DATA, t1.visitada VISITADA, t1.golos_visitada G_VISITADA, t2.visitante VISITANTE, t2.golos_visitante G_VISITANTE
 from (

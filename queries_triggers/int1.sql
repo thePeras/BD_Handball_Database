@@ -1,10 +1,7 @@
-/*
+
 .mode columns 
 .headers on 
 .nullvalue NULL
-*/
-
--- Melhores 5 marcadores da época (2020)
 
 SELECT a.nome as JOGADOR, e.nome as EQUIPA, count(*) AS NUM_GOLOS
 FROM Atleta a

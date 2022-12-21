@@ -1,10 +1,7 @@
-/*
+
 .mode columns 
 .headers on 
 .nullvalue NULL
-*/
-
--- Média de golos por época
 
 select Atleta.nome JOGADOR ,Count(*)/Epocas as GOLOS, Epocas NUM_EPOCAS
 from

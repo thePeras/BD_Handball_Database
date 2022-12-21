@@ -1,10 +1,7 @@
-/*
+
 .mode columns 
 .headers on 
 .nullvalue NULL
-*/
-
--- Ordem cronológica de eventos de um jogo
 
 select g.minuto MINUTO, g.segundo SEGUNDO, 'Golo' as EVENTO, a.nome as JOGADOR, e.nome as EQUIPA
 from Jogo j

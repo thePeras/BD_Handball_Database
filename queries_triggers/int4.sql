@@ -1,10 +1,7 @@
-/*
+
 .mode columns 
 .headers on 
 .nullvalue NULL
-*/
-
--- Média de golos por jogo em cada época 
 
 select Epoca EPOCA, round(avg(Golos),1) as GOLOS
 from 
