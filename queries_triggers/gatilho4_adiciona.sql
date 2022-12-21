@@ -1,6 +1,5 @@
 -- Verificar se o atleta que marcou o golo pertence a uma das equipas que está a jogar o jogo
 
-DROP TRIGGER IF EXISTS VerificarGoloAtleta;
 CREATE TRIGGER VerificarGoloAtleta
 BEFORE INSERT ON Golo
 WHEN NOT EXISTS(
@@ -23,7 +22,6 @@ END;
 
 -- Verificar se o atleta da interrupção está a jogar o jogo em que ocorreu a interrupção
 
-DROP TRIGGER IF EXISTS VerificarInterrupcaoAtleta;
 CREATE TRIGGER VerificarInterrupcaoAtleta
 BEFORE INSERT ON Interrupcao
 WHEN NOT EXISTS(

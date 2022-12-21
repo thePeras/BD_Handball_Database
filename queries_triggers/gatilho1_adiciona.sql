@@ -1,6 +1,5 @@
 --- Verificar se o número da jornada é válido
 
-DROP TRIGGER IF EXISTS VerificarNrJornadas;
 CREATE TRIGGER VerificarNrJornadas
 BEFORE INSERT ON Jornada
 WHEN (
