@@ -1,13 +1,50 @@
-# Trabalho da UC Base de Dados
+# A **Database** for the Portuguese male **Handball Championship**
 
-### [Drive do projeto](https://drive.google.com/drive/folders/1nm2cpPrsi22mQUJD7RdJmGtfUqmJkmAq?usp=share_link)
+>**Project**
+<br />
+Unit Course:
+[Bases de Dados](https://sigarra.up.pt/feup/pt/ucurr_geral.ficha_uc_view?pv_ocorrencia_id=501674 "Batabases"), 2nd year 
+<br />
+>Course:
+ **Informatics and Computer Engineering** 
+ <br />
+ Faculty:
+ **FEUP** (Faculty of Engineering of the University of Porto).
+<br/>
+> Report: [Relatório.pdf](./Relatório.pdf)
+<br/>
+> Evaluation: **19**/20
 
-## Tópico do Projeto:
+<br/>
 
-Desenvolver uma base de dados para gerir os resultados do campeonato português de
-**andebol**, da **primeira divisão**. Esta base de dados deve responder ao lançamento de
-resultados jornada a jornada, marcadores dos golos, equipas que jogam em casa e jogam
-como visitante. Pretende-se saber o estado do campeonato em qualquer jornada, as equipas
-em condições de ir às competições europeias e em risco de despromoção.
+## Project Goals
+
+The propuse of this project was to explore the concepts of **relational databases** and **SQL**. The project was divided in 2 parts:
+
+1. **Design** the database, using the **UML** (Unified Modeling Language) and the **ER** (Entity-Relationship) models.
+2. **Implementation** of the database, using the **SQL** language.
+
+Performance was not a goal of this project, so the database was not optimized.
+
+
+The database was implemented in **SQLite3** and tested in [Beekeper Studio](https://github.com/beekeeper-studio/beekeeper-studio).
+
+
+<br/>
+
+## Database UML Scheme
 
 ![UML_Scheme](./UML.drawio.png "UML")
+
+<br>
+
+In order to implement some of the restrictions presented in the UML model, some **SQL triggers** were created. The triggers are presented in the [triggers](./triggers) folder.
+
+Also there are some **queries** at [queries](./queries).
+
+<br/>
+
+## Populating the database
+
+The database was populated with real data from the oficial handball league website. 
+To do this, we created a  **scraper** in python. If you are curious about it, check [scraper](./scraper) folder.
