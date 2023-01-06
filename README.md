@@ -1,21 +1,17 @@
 # A **Database** for the Portuguese male **Handball Championship**
 
 >**Project**
-<br />
-Unit Course:
-[Bases de Dados](https://sigarra.up.pt/feup/pt/ucurr_geral.ficha_uc_view?pv_ocorrencia_id=501674 "Batabases"), 2nd year 
-<br />
->Course:
- **Informatics and Computer Engineering** 
- <br />
- Faculty:
- **FEUP** (Faculty of Engineering of the University of Porto).
-<br/>
+><br />
+>Unit Course: [Bases de Dados](https://sigarra.up.pt/feup/pt/ucurr_geral.ficha_uc_view?pv_ocorrencia_id=501674 "Batabases"), 2nd year 
+><br />
+>Course: **Informatics and Computer Engineering** 
+><br />
+> Faculty: **FEUP** (Faculty of Engineering of the University of Porto)
+><br/>
 > Report: [Relatório.pdf](./Relatório.pdf)
-<br/>
+><br/>
 > Evaluation: **19**/20
 
-<br/>
 
 ## Project Goals
 
@@ -25,12 +21,8 @@ The propuse of this project was to explore the concepts of **relational database
 2. **Implementation** of the database, using the **SQL** language.
 
 Performance was not a goal of this project, so the database was not optimized.
-
-
 The database was implemented in **SQLite3** and tested in [Beekeper Studio](https://github.com/beekeeper-studio/beekeeper-studio).
 
-
-<br/>
 
 ## Database UML Scheme
 
@@ -42,7 +34,6 @@ In order to implement some of the restrictions presented in the UML model, some 
 
 Also there are some **queries** at [queries](./queries).
 
-<br/>
 
 ## Populating the database
 
