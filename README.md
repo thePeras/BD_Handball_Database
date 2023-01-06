@@ -15,9 +15,9 @@
 
 ## Project Goals
 
-The propuse of this project was to explore the concepts of **relational databases** and **SQL**. The project was divided in 2 parts:
+The purpose of this project is to explore some concepts of **relational databases** and **SQL**. The project was divided in 2 parts:
 
-1. **Design** the database, using the **UML** (Unified Modeling Language) and the **ER** (Entity-Relationship) models.
+1. **Design** the database schema, using the **UML** (Unified Modeling Language) and the **ER** (Entity-Relationship) models.
 2. **Implementation** of the database, using the **SQL** language.
 
 Performance was not a goal of this project, so the database was not optimized.
@@ -32,7 +32,7 @@ The database was implemented in **SQLite3** and tested in [Beekeper Studio](http
 
 In order to implement some of the restrictions presented in the UML model, some **SQL triggers** were created. The triggers are presented in the [triggers](./triggers) folder.
 
-Also there are some **queries** at [queries](./queries).
+There are also some **queries** at [queries](./queries).
 
 
 ## Populating the database
