@@ -2,7 +2,7 @@
 
 >**Project**
 <br />
-Unit Course:
+Course Unit:
 [Bases de Dados](https://sigarra.up.pt/feup/pt/ucurr_geral.ficha_uc_view?pv_ocorrencia_id=501674 "Batabases"), 2nd year 
 <br />
 >Course:
