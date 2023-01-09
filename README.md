@@ -1,36 +1,28 @@
 # A **Database** for the Portuguese male **Handball Championship**
 
 >**Project**
-<br />
-Course Unit:
-[Bases de Dados](https://sigarra.up.pt/feup/pt/ucurr_geral.ficha_uc_view?pv_ocorrencia_id=501674 "Batabases"), 2nd year 
-<br />
->Course:
- **Informatics and Computer Engineering** 
- <br />
- Faculty:
- **FEUP** (Faculty of Engineering of the University of Porto).
-<br/>
+><br />
+>Course Unit: [Bases de Dados](https://sigarra.up.pt/feup/pt/ucurr_geral.ficha_uc_view?pv_ocorrencia_id=501674 "Databases"), 2nd year 
+><br />
+>Course: **Informatics and Computer Engineering** 
+><br />
+> Faculty: **FEUP** (Faculty of Engineering of the University of Porto)
+><br/>
 > Report: [Relatório.pdf](./Relatório.pdf)
-<br/>
+><br/>
 > Evaluation: **19**/20
 
-<br/>
 
 ## Project Goals
 
-The propuse of this project was to explore the concepts of **relational databases** and **SQL**. The project was divided in 2 parts:
+The purpose of this project is to explore some concepts of **relational databases** and **SQL**. The project was divided in 2 parts:
 
-1. **Design** the database, using the **UML** (Unified Modeling Language) and the **ER** (Entity-Relationship) models.
+1. **Design** the database schema, using the **UML** (Unified Modeling Language) and the **ER** (Entity-Relationship) models.
 2. **Implementation** of the database, using the **SQL** language.
 
 Performance was not a goal of this project, so the database was not optimized.
-
-
 The database was implemented in **SQLite3** and tested in [Beekeper Studio](https://github.com/beekeeper-studio/beekeeper-studio).
 
-
-<br/>
 
 ## Database UML Scheme
 
@@ -40,9 +32,8 @@ The database was implemented in **SQLite3** and tested in [Beekeper Studio](http
 
 In order to implement some of the restrictions presented in the UML model, some **SQL triggers** were created. The triggers are presented in the [triggers](./triggers) folder.
 
-Also there are some **queries** at [queries](./queries).
+There are also some **queries** at [queries](./queries).
 
-<br/>
 
 ## Populating the database
 
